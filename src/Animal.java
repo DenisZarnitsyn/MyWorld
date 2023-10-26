@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public abstract class Animal{
 
 //    private int idAnimal;
@@ -76,7 +78,8 @@ public abstract class Animal{
         this.coordinateAnimalY = coordinateAnimalY;
     }
 
-    public void moveAnimal() {}
+    public void moveAnimal() {
+    }
     public void reproductionAnimal(){}
     public void deathAnimal(){}
 

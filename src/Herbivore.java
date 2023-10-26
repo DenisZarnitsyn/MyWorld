@@ -7,4 +7,6 @@ public abstract class Herbivore extends Animal{
     public void eatGrass(){
 
     }
+
+    public abstract void moveAnimal(Island island);
 }
