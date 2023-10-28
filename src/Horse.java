@@ -1,9 +1,9 @@
 import java.util.List;
 import java.util.Random;
 
-public class Rabbit extends Herbivore {
+public class Horse extends Herbivore {
 
-    public Rabbit(int xpAnimal, double weightAnimal, Gender genderAnimal, int coordinateAnimalX, int coordinateAnimalY) {
+    public Horse(int xpAnimal, double weightAnimal, Gender genderAnimal, int coordinateAnimalX, int coordinateAnimalY) {
         super(xpAnimal, weightAnimal, genderAnimal, coordinateAnimalX, coordinateAnimalY);
     }
 
@@ -11,11 +11,11 @@ public class Rabbit extends Herbivore {
     public void moveAnimal(Island island) {
         Random random = new Random();
 
-        int newX = getCoordinateAnimalX() + random.nextInt(2 * DefaultValues.rabbitMaxMovement + 1) - DefaultValues.rabbitMaxMovement;
-        int newY = getCoordinateAnimalY() + random.nextInt(2 * DefaultValues.rabbitMaxMovement + 1) - DefaultValues.rabbitMaxMovement;
+        int newX = getCoordinateAnimalX() + random.nextInt(2 * DefaultValues.horseMaxMovement + 1) - DefaultValues.horseMaxMovement;
+        int newY = getCoordinateAnimalY() + random.nextInt(2 * DefaultValues.horseMaxMovement + 1) - DefaultValues.horseMaxMovement;
 
         if (newX >= 0 && newX < island.getSizeX() && newY >= 0 && newY < island.getSizeY()) {
-            if (!isTooManyRabbitsInCell(newX, newY, island)) {
+            if (!isTooManyHorsesInCell(newX, newY, island)) {
                 int currentX = getCoordinateAnimalX();
                 int currentY = getCoordinateAnimalY();
 
@@ -35,7 +35,7 @@ public class Rabbit extends Herbivore {
         int y = getCoordinateAnimalY();
         List<Object> cell = island.getGrid().get(x).get(y);
 
-        int requiredGrassCount = (int) Math.ceil(DefaultValues.rabbitSatiety);
+        int requiredGrassCount = (int) Math.ceil(DefaultValues.horseSatiety);
         int eatenGrassCount = 0;
 
         for (int i = 0; i < requiredGrassCount; i++) {
@@ -65,37 +65,38 @@ public class Rabbit extends Herbivore {
         return eatenGrassCount;
     }
 
+    @Override
     public void reproductionAnimal(Island island) {
         int x = getCoordinateAnimalX();
         int y = getCoordinateAnimalY();
         List<Object> cell = island.getGrid().get(x).get(y);
 
-        int rabbitCount = 0;
+        int horseCount = 0;
         int maleCount = 0;
         int femaleCount = 0;
 
         for (Object obj : cell) {
-            if (obj instanceof Rabbit) {
-                rabbitCount++;
-                Rabbit rabbit = (Rabbit) obj;
-                if (rabbit.getGenderAnimal() == Gender.MALE) {
+            if (obj instanceof Horse) {
+                horseCount++;
+                Horse horse = (Horse) obj;
+                if (horse.getGenderAnimal() == Gender.MALE) {
                     maleCount++;
-                } else if (rabbit.getGenderAnimal() == Gender.FEMALE) {
+                } else if (horse.getGenderAnimal() == Gender.FEMALE) {
                     femaleCount++;
                 }
             }
         }
 
-        if (rabbitCount < DefaultValues.rabbitMaxAnimalsPerCell) {
-            int remainingSpace = DefaultValues.rabbitMaxAnimalsPerCell - rabbitCount;
+        if (horseCount < DefaultValues.horseMaxAnimalsPerCell) {
+            int remainingSpace = DefaultValues.horseMaxAnimalsPerCell - horseCount;
             int minGenderCount = Math.min(maleCount, femaleCount);
-            int newRabbitCount = Math.min(remainingSpace, minGenderCount);
+            int newHorseCount = Math.min(remainingSpace, minGenderCount);
 
-            for (int i = 0; i < newRabbitCount; i++) {
+            for (int i = 0; i < newHorseCount; i++) {
                 Gender randomGender = Gender.getRandomGender();
-                Rabbit newRabbit = new Rabbit(DefaultValues.allXpAnimal, DefaultValues.rabbitWeight, randomGender, x, y);
+                Horse newHorse = new Horse(DefaultValues.allXpAnimal, DefaultValues.horseWeight, randomGender, x, y);
 
-                cell.add(newRabbit);
+                cell.add(newHorse);
             }
         }
     }
@@ -107,12 +108,12 @@ public class Rabbit extends Herbivore {
         island.getGrid().get(x).get(y).remove(this);
     }
 
-    private boolean isTooManyRabbitsInCell(int x, int y, Island island) {
-        int rabbitCount = 0;
+    private boolean isTooManyHorsesInCell(int x, int y, Island island) {
+        int horseCount = 0;
         for (Object obj : island.getGrid().get(x).get(y)) {
-            if (obj instanceof Rabbit) {
-                rabbitCount++;
-                if (rabbitCount >= DefaultValues.rabbitMaxAnimalsPerCell) {
+            if (obj instanceof Horse) {
+                horseCount++;
+                if (horseCount >= DefaultValues.horseMaxAnimalsPerCell) {
                     return true;
                 }
             }

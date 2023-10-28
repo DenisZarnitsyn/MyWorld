@@ -20,6 +20,7 @@ public class Island {
     public void simulateDay() {
         DaySimulator.simulateDay(this);
     }
+
     public int getSizeX() {
         return sizeX;
     }

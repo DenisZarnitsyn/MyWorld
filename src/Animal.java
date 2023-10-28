@@ -1,5 +1,4 @@
-public abstract class Animal{
-
+public abstract class Animal {
     private int xpAnimal;
     private double weightAnimal;
     private Gender genderAnimal;
@@ -16,12 +15,22 @@ public abstract class Animal{
 
     public abstract void moveAnimal(Island island);
 
+    public abstract void reproductionAnimal(Island island);
+
     public abstract void dieAnimal(Island island);
 
     protected void reduceWeight(double amount) {
         double animalWeight = getWeightAnimal();
         animalWeight -= amount;
         setWeightAnimal(animalWeight);
+    }
+
+    public int getXpAnimal() {
+        return xpAnimal;
+    }
+
+    public void setXpAnimal(int xpAnimal) {
+        this.xpAnimal = xpAnimal;
     }
 
     public double getWeightAnimal() {
@@ -44,7 +53,6 @@ public abstract class Animal{
         return coordinateAnimalX;
     }
 
-
     public void setCoordinateAnimalX(int coordinateAnimalX) {
         this.coordinateAnimalX = coordinateAnimalX;
     }
@@ -55,13 +63,5 @@ public abstract class Animal{
 
     public void setCoordinateAnimalY(int coordinateAnimalY) {
         this.coordinateAnimalY = coordinateAnimalY;
-    }
-
-    public int getXpAnimal() {
-        return xpAnimal;
-    }
-
-    public void setXpAnimal(int xpAnimal) {
-        this.xpAnimal = xpAnimal;
     }
 }
