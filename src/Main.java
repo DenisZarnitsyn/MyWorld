@@ -14,12 +14,11 @@ public class Main {
         int numDays = scanner.nextInt();
 
         Island island = new Island(sizeX, sizeY);
-        island.printIslandObjects();
+        System.out.println("World creation!");
 
-        for (int day = 1; day <= numDays; day++) {1
-            System.out.println("День " + day + ":");
+        for (int day = 1; day <= numDays; day++) {
+            System.out.println("Day " + day + ":");
             island.simulateDay();
-            island.printIslandObjects();
         }
     }
 }

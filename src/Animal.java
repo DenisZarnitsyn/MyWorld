@@ -1,25 +1,27 @@
-import java.util.Random;
-
 public abstract class Animal{
 
-//    private int idAnimal;
-//    private String nameAnimal;
+    private int xpAnimal;
     private double weightAnimal;
-    private double currentWeightAnimal;
-    private int maxAnimalsPerCell;
-    private int maxMovementAnimal;
-    private double satietyOfTheAnimal;
+    private Gender genderAnimal;
     private int coordinateAnimalX;
     private int coordinateAnimalY;
 
-    public Animal(double weightAnimal, double currentWeightAnimal, int maxAnimalsPerCell, int maxMovementAnimal, double satietyOfTheAnimal, int coordinateAnimalX, int coordinateAnimalY) {
+    public Animal(int xpAnimal, double weightAnimal, Gender genderAnimal, int coordinateAnimalX, int coordinateAnimalY) {
+        this.xpAnimal = xpAnimal;
         this.weightAnimal = weightAnimal;
-        this.currentWeightAnimal = currentWeightAnimal;
-        this.maxAnimalsPerCell = maxAnimalsPerCell;
-        this.maxMovementAnimal = maxMovementAnimal;
-        this.satietyOfTheAnimal = satietyOfTheAnimal;
+        this.genderAnimal = genderAnimal;
         this.coordinateAnimalX = coordinateAnimalX;
         this.coordinateAnimalY = coordinateAnimalY;
+    }
+
+    public abstract void moveAnimal(Island island);
+
+    public abstract void dieAnimal(Island island);
+
+    protected void reduceWeight(double amount) {
+        double animalWeight = getWeightAnimal();
+        animalWeight -= amount;
+        setWeightAnimal(animalWeight);
     }
 
     public double getWeightAnimal() {
@@ -30,41 +32,18 @@ public abstract class Animal{
         this.weightAnimal = weightAnimal;
     }
 
-    public double getCurrentWeightAnimal() {
-        return currentWeightAnimal;
+    public Gender getGenderAnimal() {
+        return genderAnimal;
     }
 
-    public void setCurrentWeightAnimal(double currentWeightAnimal) {
-        this.currentWeightAnimal = currentWeightAnimal;
-    }
-
-    public int getMaxAnimalsPerCell() {
-        return maxAnimalsPerCell;
-    }
-
-    public void setMaxAnimalsPerCell(int maxAnimalsPerCell) {
-        this.maxAnimalsPerCell = maxAnimalsPerCell;
-    }
-
-    public int getMaxMovementAnimal() {
-        return maxMovementAnimal;
-    }
-
-    public void setMaxMovementAnimal(int maxMovementAnimal) {
-        this.maxMovementAnimal = maxMovementAnimal;
-    }
-
-    public double getSatietyOfTheAnimal() {
-        return satietyOfTheAnimal;
-    }
-
-    public void setSatietyOfTheAnimal(double satietyOfTheAnimal) {
-        this.satietyOfTheAnimal = satietyOfTheAnimal;
+    public void setGenderAnimal(Gender genderAnimal) {
+        this.genderAnimal = genderAnimal;
     }
 
     public int getCoordinateAnimalX() {
         return coordinateAnimalX;
     }
+
 
     public void setCoordinateAnimalX(int coordinateAnimalX) {
         this.coordinateAnimalX = coordinateAnimalX;
@@ -78,9 +57,11 @@ public abstract class Animal{
         this.coordinateAnimalY = coordinateAnimalY;
     }
 
-    public void moveAnimal() {
+    public int getXpAnimal() {
+        return xpAnimal;
     }
-    public void reproductionAnimal(){}
-    public void deathAnimal(){}
 
+    public void setXpAnimal(int xpAnimal) {
+        this.xpAnimal = xpAnimal;
+    }
 }

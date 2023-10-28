@@ -2,33 +2,35 @@ import java.util.Random;
 
 public class Grass {
 
-    //    private int idGrass;
     private double weightGrass;
-    private int maximumPerCell;
-
     private int coordinateGrassX;
     private int coordinateGrassY;
 
-    public Grass(){}
-    public Grass(double weightGrass, int maximumPerCell, int coordinateGrassX, int coordinateGrassY) {
+    public Grass() {
+    }
+
+    public Grass(double weightGrass, int coordinateGrassX, int coordinateGrassY) {
         this.weightGrass = weightGrass;
-        this.maximumPerCell = maximumPerCell;
         this.coordinateGrassX = coordinateGrassX;
         this.coordinateGrassY = coordinateGrassY;
     }
 
-    public void growthGrass(Island island, int x, int y) {
+    public int growthGrass(Island island, double weightAnimal, int x, int y) {
         int currentGrassCount = countGrassInCell(island, x, y);
-        int maxGrassToAdd = DefaultValues.grassMaximumPerCell - currentGrassCount;
+        int maxGrassToAdd = DefaultValues.grassMaximumPerCell - 200;
 
         Random random = new Random();
         int grassCount = random.nextInt(maxGrassToAdd + 1);
 
         for (int i = 0; i < grassCount; i++) {
-            Grass grass = new Grass(DefaultValues.grassWeight, DefaultValues.grassMaximumPerCell, x, y);
+            Grass grass = new Grass(weightAnimal, x, y);
             island.getGrid().get(x).get(y).add(grass);
+            IslandStatistics.incrementDailyGrassGenerated();
         }
+
+        return grassCount;
     }
+
 
     private int countGrassInCell(Island island, int x, int y) {
         int grassCount = 0;
@@ -44,16 +46,8 @@ public class Grass {
         return weightGrass;
     }
 
-    public void setWeightGrass(double weightGrass) {
-        this.weightGrass = weightGrass;
-    }
-
-    public int getMaximumPerCell() {
-        return maximumPerCell;
-    }
-
-    public void setMaximumPerCell(int maximumPerCell) {
-        this.maximumPerCell = maximumPerCell;
+    public void setWeightGrass(double weightAnimal) {
+        this.weightGrass = weightAnimal;
     }
 
     public int getCoordinateGrassX() {
