@@ -3,5 +3,5 @@ public abstract class Herbivore extends Animal {
         super(xpAnimal, weightAnimal, genderAnimal, coordinateAnimalX, coordinateAnimalY);
     }
 
-    public abstract int eatGrass(Island island);
+    public abstract void eatGrass(Island island);
 }

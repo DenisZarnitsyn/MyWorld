@@ -14,26 +14,25 @@ public class Caterpillar extends Herbivore {
 
     // Caterpillars do not eat grass
     @Override
-    public int eatGrass(Island island) {
+    public void eatGrass(Island island) {
         int x = getCoordinateAnimalX();
         int y = getCoordinateAnimalY();
         List<Object> cell = island.getGrid().get(x).get(y);
 
-        int eatenGrassCount = 0;
+        boolean grassPresent = false;
 
         for (Object obj : cell) {
             if (obj instanceof Grass) {
-                eatenGrassCount++;
+                grassPresent = true;
+                break;
             }
         }
 
-        if (eatenGrassCount > 0) {
+        if (grassPresent) {
             setXpAnimal(DefaultValues.allXpAnimal);
         } else {
             setXpAnimal(getXpAnimal() - 1);
         }
-
-        return eatenGrassCount;
     }
 
     @Override

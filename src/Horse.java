@@ -30,7 +30,7 @@ public class Horse extends Herbivore {
     }
 
     @Override
-    public int eatGrass(Island island) {
+    public void eatGrass(Island island) {
         int x = getCoordinateAnimalX();
         int y = getCoordinateAnimalY();
         List<Object> cell = island.getGrid().get(x).get(y);
@@ -52,7 +52,6 @@ public class Horse extends Herbivore {
 
                     if (eatenGrassCount == requiredGrassCount) {
                         setXpAnimal(DefaultValues.allXpAnimal);
-                        return eatenGrassCount;
                     }
                 }
             }
@@ -61,8 +60,6 @@ public class Horse extends Herbivore {
                 setXpAnimal(getXpAnimal() - 1);
             }
         }
-
-        return eatenGrassCount;
     }
 
     @Override

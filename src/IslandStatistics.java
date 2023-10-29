@@ -10,6 +10,14 @@ public class IslandStatistics {
     static String sheepSymbol = "🐑";
     static String buffaloSymbol = "🐃";
     static String caterpillarSymbol = "🐛";
+    static String wolfSymbol = "🐺";
+    static String snakeSymbol = "🐍";
+    static String foxSymbol = "🦊";
+    static String bearSymbol = "🐻";
+    static String eagleSymbol = "🦅";
+    static String mouseSymbol = "🐭";
+    static String boarSymbol = "🐗";
+    static String duckSymbol = "🦆";
 
     private static int dailyGrassGenerated = 0;
     private static int dailyGrassConsumed = 0;
@@ -40,6 +48,51 @@ public class IslandStatistics {
     private static int totalBuffaloEaten = 0;
     private static int totalBuffaloGrown = 0;
 
+    private static int dailyCaterpillarGenerated = 0;
+    private static int dailyCaterpillarConsumed = 0;
+    private static int totalCaterpillarEaten = 0;
+    private static int totalCaterpillarGrown = 0;
+
+    private static int dailyWolfGenerated = 0;
+    private static int dailyWolfConsumed = 0;
+    private static int totalWolfEaten = 0;
+    private static int totalWolfGrown = 0;
+
+    private static int dailySnakeGenerated = 0;
+    private static int dailySnakeConsumed = 0;
+    private static int totalSnakeEaten = 0;
+    private static int totalSnakeGrown = 0;
+
+    private static int dailyFoxGenerated = 0;
+    private static int dailyFoxConsumed = 0;
+    private static int totalFoxEaten = 0;
+    private static int totalFoxGrown = 0;
+
+    private static int dailyBearGenerated = 0;
+    private static int dailyBearConsumed = 0;
+    private static int totalBearEaten = 0;
+    private static int totalBearGrown = 0;
+
+    private static int dailyEagleGenerated = 0;
+    private static int dailyEagleConsumed = 0;
+    private static int totalEagleEaten = 0;
+    private static int totalEagleGrown = 0;
+
+    private static int dailyMouseGenerated = 0;
+    private static int dailyMouseConsumed = 0;
+    private static int totalMouseEaten = 0;
+    private static int totalMouseGrown = 0;
+
+    private static int dailyBoarGenerated = 0;
+    private static int dailyBoarConsumed = 0;
+    private static int totalBoarEaten = 0;
+    private static int totalBoarGrown = 0;
+
+    private static int dailyDuckGenerated = 0;
+    private static int dailyDuckConsumed = 0;
+    private static int totalDuckEaten = 0;
+    private static int totalDuckGrown = 0;
+
     public static void countIslandObjectsWithAnimals(Map<Integer, Map<Integer, List<Object>>> grid) {
         for (int x = 0; x < grid.size(); x++) {
             for (int y = 0; y < grid.get(x).size(); y++) {
@@ -62,6 +115,30 @@ public class IslandStatistics {
                 int totalCaterpillarCount = 0;
                 int maleCaterpillarCount = 0;
                 int femaleCaterpillarCount = 0;
+                int totalWolfCount = 0;
+                int maleWolfCount = 0;
+                int femaleWolfCount = 0;
+                int totalSnakeCount = 0;
+                int maleSnakeCount = 0;
+                int femaleSnakeCount = 0;
+                int totalFoxCount = 0;
+                int maleFoxCount = 0;
+                int femaleFoxCount = 0;
+                int totalBearCount = 0;
+                int maleBearCount = 0;
+                int femaleBearCount = 0;
+                int totalEagleCount = 0;
+                int maleEagleCount = 0;
+                int femaleEagleCount = 0;
+                int totalMouseCount = 0;
+                int maleMouseCount = 0;
+                int femaleMouseCount = 0;
+                int totalBoarCount = 0;
+                int maleBoarCount = 0;
+                int femaleBoarCount = 0;
+                int totalDuckCount = 0;
+                int maleDuckCount = 0;
+                int femaleDuckCount = 0;
 
                 for (Object obj : grid.get(x).get(y)) {
                     if (obj instanceof Grass) {
@@ -114,6 +191,70 @@ public class IslandStatistics {
                         } else if (caterpillar.getGenderAnimal() == Gender.FEMALE) {
                             femaleCaterpillarCount++;
                         }
+                    } else if (obj instanceof Wolf) {
+                        totalWolfCount++;
+                        Wolf wolf = (Wolf) obj;
+                        if (wolf.getGenderAnimal() == Gender.MALE) {
+                            maleWolfCount++;
+                        } else if (wolf.getGenderAnimal() == Gender.FEMALE) {
+                            femaleWolfCount++;
+                        }
+                    } else if (obj instanceof Snake) {
+                        totalSnakeCount++;
+                        Snake snake = (Snake) obj;
+                        if (snake.getGenderAnimal() == Gender.MALE) {
+                            maleSnakeCount++;
+                        } else if (snake.getGenderAnimal() == Gender.FEMALE) {
+                            femaleSnakeCount++;
+                        }
+                    } else if (obj instanceof Fox) {
+                        totalFoxCount++;
+                        Fox fox = (Fox) obj;
+                        if (fox.getGenderAnimal() == Gender.MALE) {
+                            maleFoxCount++;
+                        } else if (fox.getGenderAnimal() == Gender.FEMALE) {
+                            femaleFoxCount++;
+                        }
+                    } else if (obj instanceof Bear) {
+                        totalBearCount++;
+                        Bear bear = (Bear) obj;
+                        if (bear.getGenderAnimal() == Gender.MALE) {
+                            maleBearCount++;
+                        } else if (bear.getGenderAnimal() == Gender.FEMALE) {
+                            femaleBearCount++;
+                        }
+                    } else if (obj instanceof Eagle) {
+                        totalEagleCount++;
+                        Eagle eagle = (Eagle) obj;
+                        if (eagle.getGenderAnimal() == Gender.MALE) {
+                            maleEagleCount++;
+                        } else if (eagle.getGenderAnimal() == Gender.FEMALE) {
+                            femaleEagleCount++;
+                        }
+                    } else if (obj instanceof Mouse) {
+                        totalMouseCount++;
+                        Mouse mouse = (Mouse) obj;
+                        if (mouse.getGenderAnimal() == Gender.MALE) {
+                            maleMouseCount++;
+                        } else if (mouse.getGenderAnimal() == Gender.FEMALE) {
+                            femaleMouseCount++;
+                        }
+                    } else if (obj instanceof Boar) {
+                        totalBoarCount++;
+                        Boar boar = (Boar) obj;
+                        if (boar.getGenderAnimal() == Gender.MALE) {
+                            maleBoarCount++;
+                        } else if (boar.getGenderAnimal() == Gender.FEMALE) {
+                            femaleBoarCount++;
+                        }
+                    } else if (obj instanceof Duck) {
+                        totalDuckCount++;
+                        Duck duck = (Duck) obj;
+                        if (duck.getGenderAnimal() == Gender.MALE) {
+                            maleDuckCount++;
+                        } else if (duck.getGenderAnimal() == Gender.FEMALE) {
+                            femaleDuckCount++;
+                        }
                     }
                 }
 
@@ -124,10 +265,19 @@ public class IslandStatistics {
                 System.out.print(goatSymbol + ": " + totalGoatCount + " (" + goatSymbol + "♂: " + maleGoatCount + ", " + goatSymbol + "♀: " + femaleGoatCount + ")");
                 System.out.print(sheepSymbol + ": " + totalSheepCount + " (" + sheepSymbol + "♂: " + maleSheepCount + ", " + sheepSymbol + "♀: " + femaleSheepCount + ")");
                 System.out.print(buffaloSymbol + ": " + totalBuffaloCount + " (" + buffaloSymbol + "♂: " + maleBuffaloCount + ", " + buffaloSymbol + "♀: " + femaleBuffaloCount + ")");
-                System.out.println(caterpillarSymbol + ": " + (totalCaterpillarCount) + " (" + caterpillarSymbol + "♂: " + maleCaterpillarCount + ", " + caterpillarSymbol + "♀: " + femaleCaterpillarCount + ")");
+                System.out.print(caterpillarSymbol + ": " + (totalCaterpillarCount) + " (" + caterpillarSymbol + "♂: " + maleCaterpillarCount + ", " + caterpillarSymbol + "♀: " + femaleCaterpillarCount + ")");
+                System.out.print(wolfSymbol + ": " + totalWolfCount + " (" + wolfSymbol + "♂: " + maleWolfCount + ", " + wolfSymbol + "♀: " + femaleWolfCount + ")");
+                System.out.print(snakeSymbol + ": " + totalSnakeCount + " (" + snakeSymbol + "♂: " + maleSnakeCount + ", " + snakeSymbol + "♀: " + femaleSnakeCount + ")");
+                System.out.print(foxSymbol + ": " + totalFoxCount + " (" + foxSymbol + "♂: " + maleFoxCount + ", " + foxSymbol + "♀: " + femaleFoxCount + ")");
+                System.out.print(bearSymbol + ": " + totalBearCount + " (" + bearSymbol + "♂: " + maleBearCount + ", " + bearSymbol + "♀: " + femaleBearCount + ")");
+                System.out.print(eagleSymbol + ": " + totalEagleCount + " (" + eagleSymbol + "♂: " + maleEagleCount + ", " + eagleSymbol + "♀: " + femaleEagleCount + ")");
+                System.out.print(mouseSymbol + ": " + totalMouseCount + " (" + mouseSymbol + "♂: " + maleMouseCount + ", " + mouseSymbol + "♀: " + femaleMouseCount + ")");
+                System.out.println(boarSymbol + ": " + totalBoarCount + " (" + boarSymbol + "♂: " + maleBoarCount + ", " + boarSymbol + "♀: " + femaleBoarCount + ")");
+                System.out.println(duckSymbol + ": " + totalDuckCount + " (" + duckSymbol + "♂: " + maleDuckCount + ", " + duckSymbol + "♀: " + femaleDuckCount + ")");
             }
         }
     }
+
 
 
     public static void countTotalIslandObjects(Map<Integer, Map<Integer, List<Object>>> grid) {
@@ -149,6 +299,30 @@ public class IslandStatistics {
         int totalCaterpillarCount = 0;
         int totalMaleCaterpillarCount = 0;
         int totalFemaleCaterpillarCount = 0;
+        int totalWolfCount = 0;
+        int totalMaleWolfCount = 0;
+        int totalFemaleWolfCount = 0;
+        int totalSnakeCount = 0;
+        int totalMaleSnakeCount = 0;
+        int totalFemaleSnakeCount = 0;
+        int totalFoxCount = 0;
+        int totalMaleFoxCount = 0;
+        int totalFemaleFoxCount = 0;
+        int totalBearCount = 0;
+        int totalMaleBearCount = 0;
+        int totalFemaleBearCount = 0;
+        int totalEagleCount = 0;
+        int totalMaleEagleCount = 0;
+        int totalFemaleEagleCount = 0;
+        int totalMouseCount = 0;
+        int totalMaleMouseCount = 0;
+        int totalFemaleMouseCount = 0;
+        int totalBoarCount = 0;
+        int totalMaleBoarCount = 0;
+        int totalFemaleBoarCount = 0;
+        int totalDuckCount = 0;
+        int totalMaleDuckCount = 0;
+        int totalFemaleDuckCount = 0;
 
         for (int x = 0; x < grid.size(); x++) {
             for (int y = 0; y < grid.get(x).size(); y++) {
@@ -202,6 +376,70 @@ public class IslandStatistics {
                         } else if (caterpillar.getGenderAnimal() == Gender.FEMALE) {
                             totalFemaleCaterpillarCount++;
                         }
+                    } else if (obj instanceof Wolf) {
+                        Wolf wolf = (Wolf) obj;
+                        totalWolfCount++;
+                        if (wolf.getGenderAnimal() == Gender.MALE) {
+                            totalMaleWolfCount++;
+                        } else if (wolf.getGenderAnimal() == Gender.FEMALE) {
+                            totalFemaleWolfCount++;
+                        }
+                    } else if (obj instanceof Snake) {
+                        Snake snake = (Snake) obj;
+                        totalSnakeCount++;
+                        if (snake.getGenderAnimal() == Gender.MALE) {
+                            totalMaleSnakeCount++;
+                        } else if (snake.getGenderAnimal() == Gender.FEMALE) {
+                            totalFemaleSnakeCount++;
+                        }
+                    } else if (obj instanceof Fox) {
+                        Fox fox = (Fox) obj;
+                        totalFoxCount++;
+                        if (fox.getGenderAnimal() == Gender.MALE) {
+                            totalMaleFoxCount++;
+                        } else if (fox.getGenderAnimal() == Gender.FEMALE) {
+                            totalFemaleFoxCount++;
+                        }
+                    } else if (obj instanceof Bear) {
+                        Bear bear = (Bear) obj;
+                        totalBearCount++;
+                        if (bear.getGenderAnimal() == Gender.MALE) {
+                            totalMaleBearCount++;
+                        } else if (bear.getGenderAnimal() == Gender.FEMALE) {
+                            totalFemaleBearCount++;
+                        }
+                    } else if (obj instanceof Eagle) {
+                        Eagle eagle = (Eagle) obj;
+                        totalEagleCount++;
+                        if (eagle.getGenderAnimal() == Gender.MALE) {
+                            totalMaleEagleCount++;
+                        } else if (eagle.getGenderAnimal() == Gender.FEMALE) {
+                            totalFemaleEagleCount++;
+                        }
+                    } else if (obj instanceof Mouse) {
+                        Mouse mouse = (Mouse) obj;
+                        totalMouseCount++;
+                        if (mouse.getGenderAnimal() == Gender.MALE) {
+                            totalMaleMouseCount++;
+                        } else if (mouse.getGenderAnimal() == Gender.FEMALE) {
+                            totalFemaleMouseCount++;
+                        }
+                    } else if (obj instanceof Boar) {
+                        Boar boar = (Boar) obj;
+                        totalBoarCount++;
+                        if (boar.getGenderAnimal() == Gender.MALE) {
+                            totalMaleBoarCount++;
+                        } else if (boar.getGenderAnimal() == Gender.FEMALE) {
+                            totalFemaleBoarCount++;
+                        }
+                    } else if (obj instanceof Duck) {
+                        Duck duck = (Duck) obj;
+                        totalDuckCount++;
+                        if (duck.getGenderAnimal() == Gender.MALE) {
+                            totalMaleDuckCount++;
+                        } else if (duck.getGenderAnimal() == Gender.FEMALE) {
+                            totalFemaleDuckCount++;
+                        }
                     }
                 }
             }
@@ -214,7 +452,16 @@ public class IslandStatistics {
         System.out.print(goatSymbol + ": " + (totalMaleGoatCount + totalFemaleGoatCount) + " (" + goatSymbol + "♂: " + totalMaleGoatCount + ", " + goatSymbol + "♀: " + totalFemaleGoatCount + ")");
         System.out.print(sheepSymbol + ": " + (totalMaleSheepCount + totalFemaleSheepCount) + " (" + sheepSymbol + "♂: " + totalMaleSheepCount + ", " + sheepSymbol + "♀: " + totalFemaleSheepCount + ")");
         System.out.print(buffaloSymbol + ": " + (totalMaleBuffaloCount + totalFemaleBuffaloCount) + " (" + buffaloSymbol + "♂: " + totalMaleBuffaloCount + ", " + buffaloSymbol + "♀: " + totalFemaleBuffaloCount + ")");
-        System.out.println(caterpillarSymbol + ": " + (totalCaterpillarCount) + " (" + caterpillarSymbol + "♂: " + totalMaleCaterpillarCount + ", " + caterpillarSymbol + "♀: " + totalFemaleCaterpillarCount + ")");
+        System.out.print(caterpillarSymbol + ": " + (totalCaterpillarCount) + " (" + caterpillarSymbol + "♂: " + totalMaleCaterpillarCount + ", " + caterpillarSymbol + "♀: " + totalFemaleCaterpillarCount + ")");
+        System.out.print(wolfSymbol + ": " + (totalMaleWolfCount + totalFemaleWolfCount) + " (" + wolfSymbol + "♂: " + totalMaleWolfCount + ", " + wolfSymbol + "♀: " + totalFemaleWolfCount + ")");
+        System.out.print(snakeSymbol + ": " + (totalMaleSnakeCount + totalFemaleSnakeCount) + " (" + snakeSymbol + "♂: " + totalMaleSnakeCount + ", " + snakeSymbol + "♀: " + totalFemaleSnakeCount + ")");
+        System.out.print(foxSymbol + ": " + (totalMaleFoxCount + totalFemaleFoxCount) + " (" + foxSymbol + "♂: " + totalMaleFoxCount + ", " + foxSymbol + "♀: " + totalFemaleFoxCount + ")");
+        System.out.print(bearSymbol + ": " + (totalMaleBearCount + totalFemaleBearCount) + " (" + bearSymbol + "♂: " + totalMaleBearCount + ", " + bearSymbol + "♀: " + totalFemaleBearCount + ")");
+        System.out.print(eagleSymbol + ": " + (totalMaleEagleCount + totalFemaleEagleCount) + " (" + eagleSymbol + "♂: " + totalMaleEagleCount + ", " + eagleSymbol + "♀: " + totalFemaleEagleCount + ")");
+        System.out.print(mouseSymbol + ": " + (totalMaleMouseCount + totalFemaleMouseCount) + " (" + mouseSymbol + "♂: " + totalMaleMouseCount + ", " + mouseSymbol + "♀: " + totalFemaleMouseCount + ")");
+        System.out.println(boarSymbol + ": " + (totalMaleBoarCount + totalFemaleBoarCount) + " (" + boarSymbol + "♂: " + totalMaleBoarCount + ", " + boarSymbol + "♀: " + totalFemaleBoarCount + ")");
+        System.out.println(duckSymbol + ": " + (totalMaleDuckCount + totalFemaleDuckCount) + " (" + duckSymbol + "♂: " + totalMaleDuckCount + ", " + duckSymbol + "♀: " + totalFemaleDuckCount + ")");
     }
+
 
 }

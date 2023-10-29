@@ -48,4 +48,54 @@ public class DefaultValues {
     public static int caterpillarMaxAnimalsPerCell = 1000;
     public static int caterpillarMaxMovement = 0;
     public static double caterpillarSatiety = 0;
+
+    // Mouse
+    public static double mouseWeight = 0.05;
+    public static int mouseMaxAnimalsPerCell = 500;
+    public static int mouseMaxMovement = 	1;
+    public static double mouseSatiety = 0.01;
+
+    // Boar
+    public static double boarWeight = 400.0;
+    public static int boarMaxAnimalsPerCell = 50;
+    public static int boarMaxMovement = 	2;
+    public static double boarSatiety = 50.0;
+
+    // Duck
+    public static double duckWeight = 1.0;
+    public static int duckMaxAnimalsPerCell = 200;
+    public static int duckMaxMovement = 4;
+    public static double duckSatiety = 0.15;
+
+    // Wolf
+    public static double wolfWeight = 50.0;
+    public static int wolfMaxAnimalsPerCell = 30;
+    public static int wolfMaxMovement = 3;
+    public static double wolfSatiety = 8.0;
+
+    // Snake
+    public static double snakeWeight = 15.0;
+    public static int snakeMaxAnimalsPerCell = 30;
+    public static int snakeMaxMovement = 1;
+    public static double snakeSatiety = 3.0;
+
+    // Fox
+    public static double foxWeight = 8.0;
+    public static int foxMaxAnimalsPerCell = 30;
+    public static int foxMaxMovement = 2;
+    public static double foxSatiety = 2.0;
+
+    // Dear
+    public static double bearWeight = 500.0;
+    public static int bearMaxAnimalsPerCell = 5;
+    public static int bearMaxMovement = 2;
+    public static double bearSatiety = 80.0;
+
+    // Eagle
+    public static double eagleWeight = 6.0;
+    public static int eagleMaxAnimalsPerCell = 20;
+    public static int eagleMaxMovement = 3;
+    public static double eagleSatiety = 1.0;
+
+
 }

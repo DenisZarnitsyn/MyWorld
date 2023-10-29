@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Random;
+import java.util.Iterator;
 
 public class Rabbit extends Herbivore {
 
@@ -30,39 +31,32 @@ public class Rabbit extends Herbivore {
     }
 
     @Override
-    public int eatGrass(Island island) {
+    public void eatGrass(Island island) {
         int x = getCoordinateAnimalX();
         int y = getCoordinateAnimalY();
         List<Object> cell = island.getGrid().get(x).get(y);
 
         int requiredGrassCount = (int) Math.ceil(DefaultValues.rabbitSatiety);
         int eatenGrassCount = 0;
+        Iterator<Object> iterator = cell.iterator();
 
-        for (int i = 0; i < requiredGrassCount; i++) {
-            boolean foundGrassToEat = false;
+        while (iterator.hasNext() && eatenGrassCount < requiredGrassCount) {
+            Object obj = iterator.next();
+            if (obj instanceof Grass) {
+                Grass grass = (Grass) obj;
 
-            for (Object obj : cell) {
-                if (obj instanceof Grass) {
-                    Grass grass = (Grass) obj;
+                iterator.remove();
+                eatenGrassCount++;
 
-                    eatenGrassCount++;
-                    foundGrassToEat = true;
-
-                    cell.remove(obj);
-
-                    if (eatenGrassCount == requiredGrassCount) {
-                        setXpAnimal(DefaultValues.allXpAnimal);
-                        return eatenGrassCount;
-                    }
+                if (eatenGrassCount == requiredGrassCount) {
+                    setXpAnimal(DefaultValues.allXpAnimal);
                 }
-            }
-
-            if (!foundGrassToEat) {
-                setXpAnimal(getXpAnimal() - 1);
             }
         }
 
-        return eatenGrassCount;
+        if (eatenGrassCount < requiredGrassCount) {
+            setXpAnimal(getXpAnimal() - 1);
+        }
     }
 
     public void reproductionAnimal(Island island) {
