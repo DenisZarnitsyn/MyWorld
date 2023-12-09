@@ -1,6 +1,11 @@
+package Island.IslandStatistics.ObjectInitializer.DaySimulator;
+
+import Animals.Grass.*;
+import DefaultValues.Gender.*;
 import java.util.*;
 
 public class ObjectInitializer {
+
 
     public static void initializeIsland(Island island) {
         Grass grass = new Grass();

@@ -1,10 +1,16 @@
+package Animals.Grass;
+
+import DefaultValues.Gender.*;
+import Island.IslandStatistics.ObjectInitializer.DaySimulator.*;
+
+import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
 
-public class Snake extends Carnivore {
+public class Fox extends Carnivore {
 
-    public Snake(int xpAnimal, double weightAnimal, Gender genderAnimal, int coordinateAnimalX, int coordinateAnimalY) {
+    public Fox(int xpAnimal, double weightAnimal, Gender genderAnimal, int coordinateAnimalX, int coordinateAnimalY) {
         super(xpAnimal, weightAnimal, genderAnimal, coordinateAnimalX, coordinateAnimalY);
     }
 
@@ -12,11 +18,11 @@ public class Snake extends Carnivore {
     public void moveAnimal(Island island) {
         Random random = new Random();
 
-        int newX = getCoordinateAnimalX() + random.nextInt(2 * DefaultValues.snakeMaxMovement + 1) - DefaultValues.snakeMaxMovement;
-        int newY = getCoordinateAnimalY() + random.nextInt(2 * DefaultValues.snakeMaxMovement + 1) - DefaultValues.snakeMaxMovement;
+        int newX = getCoordinateAnimalX() + random.nextInt(2 * DefaultValues.foxMaxMovement + 1) - DefaultValues.foxMaxMovement;
+        int newY = getCoordinateAnimalY() + random.nextInt(2 * DefaultValues.foxMaxMovement + 1) - DefaultValues.foxMaxMovement;
 
         if (newX >= 0 && newX < island.getSizeX() && newY >= 0 && newY < island.getSizeY()) {
-            if (!isTooManySnakesInCell(newX, newY, island)) {
+            if (!isTooManyFoxesInCell(newX, newY, island)) {
                 int currentX = getCoordinateAnimalX();
                 int currentY = getCoordinateAnimalY();
 
@@ -48,23 +54,23 @@ public class Snake extends Carnivore {
             }
         }
 
-        int requiredRodentCount = (int) Math.ceil(DefaultValues.snakeSatiety);
-        int eatenRodentCount = 0;
+        int requiredMeatCount = (int) Math.ceil(DefaultValues.foxSatiety);
+        int eatenMeatCount = 0;
         double eatenWeight = 0.0;
 
-        while (eatenRodentCount < requiredRodentCount && !priorityQueue.isEmpty()) {
+        while (eatenMeatCount < requiredMeatCount && !priorityQueue.isEmpty()) {
             Animal animal = priorityQueue.poll();
 
-            if (eatenWeight + animal.getWeightAnimal() <= DefaultValues.snakeSatiety) {
+            if (eatenWeight + animal.getWeightAnimal() <= DefaultValues.foxSatiety) {
                 cell.remove(animal);
                 eatenWeight += animal.getWeightAnimal();
-                eatenRodentCount++;
+                eatenMeatCount++;
             } else {
                 break;
             }
         }
 
-        if (eatenRodentCount > 0) {
+        if (eatenMeatCount > 0) {
             setXpAnimal(DefaultValues.allXpAnimal);
         } else {
             setXpAnimal(getXpAnimal() - 1);
@@ -73,13 +79,13 @@ public class Snake extends Carnivore {
 
     private double getEatProbability(Animal animal) {
         if (animal instanceof Mouse) {
-            return 0.4;
+            return 0.9;
         } else if (animal instanceof Rabbit) {
-            return 0.2;
-        } else if (animal instanceof Fox) {
-            return 0.15;
+            return 0.7;
         } else if (animal instanceof Duck) {
-            return 0.1;
+            return 0.6;
+        } else if (animal instanceof Caterpillar) {
+            return 0.40;
         }
         return 0.0;
     }
@@ -90,32 +96,32 @@ public class Snake extends Carnivore {
         int y = getCoordinateAnimalY();
         List<Object> cell = island.getGrid().get(x).get(y);
 
-        int snakeCount = 0;
+        int foxCount = 0;
         int maleCount = 0;
         int femaleCount = 0;
 
         for (Object obj : cell) {
-            if (obj instanceof Snake) {
-                snakeCount++;
-                Snake snake = (Snake) obj;
-                if (snake.getGenderAnimal() == Gender.MALE) {
+            if (obj instanceof Fox) {
+                foxCount++;
+                Fox fox = (Fox) obj;
+                if (fox.getGenderAnimal() == Gender.MALE) {
                     maleCount++;
-                } else if (snake.getGenderAnimal() == Gender.FEMALE) {
+                } else if (fox.getGenderAnimal() == Gender.FEMALE) {
                     femaleCount++;
                 }
             }
         }
 
-        if (snakeCount < DefaultValues.snakeMaxAnimalsPerCell) {
-            int remainingSpace = DefaultValues.snakeMaxAnimalsPerCell - snakeCount;
+        if (foxCount < DefaultValues.foxMaxAnimalsPerCell) {
+            int remainingSpace = DefaultValues.foxMaxAnimalsPerCell - foxCount;
             int minGenderCount = Math.min(maleCount, femaleCount);
-            int newSnakeCount = Math.min(remainingSpace, minGenderCount);
+            int newFoxCount = Math.min(remainingSpace, minGenderCount);
 
-            for (int i = 0; i < newSnakeCount; i++) {
+            for (int i = 0; i < newFoxCount; i++) {
                 Gender randomGender = Gender.getRandomGender();
-                Snake newSnake = new Snake(DefaultValues.allXpAnimal, DefaultValues.snakeWeight, randomGender, x, y);
+                Fox newFox = new Fox(DefaultValues.allXpAnimal, DefaultValues.foxWeight, randomGender, x, y);
 
-                cell.add(newSnake);
+                cell.add(newFox);
             }
         }
     }
@@ -127,12 +133,12 @@ public class Snake extends Carnivore {
         island.getGrid().get(x).get(y).remove(this);
     }
 
-    private boolean isTooManySnakesInCell(int x, int y, Island island) {
-        int wolfCount = 0;
+    private boolean isTooManyFoxesInCell(int x, int y, Island island) {
+        int foxCount = 0;
         for (Object obj : island.getGrid().get(x).get(y)) {
-            if (obj instanceof Wolf) {
-                wolfCount++;
-                if (wolfCount >= DefaultValues.snakeMaxAnimalsPerCell) {
+            if (obj instanceof Fox) {
+                foxCount++;
+                if (foxCount >= DefaultValues.foxMaxAnimalsPerCell) {
                     return true;
                 }
             }

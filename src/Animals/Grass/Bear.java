@@ -1,10 +1,14 @@
+package Animals.Grass;
+
+import DefaultValues.Gender.*;
+import Island.IslandStatistics.ObjectInitializer.DaySimulator.*;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
 
-public class Wolf extends Carnivore {
+public class Bear extends Carnivore {
 
-    public Wolf(int xpAnimal, double weightAnimal, Gender genderAnimal, int coordinateAnimalX, int coordinateAnimalY) {
+    public Bear(int xpAnimal, double weightAnimal, Gender genderAnimal, int coordinateAnimalX, int coordinateAnimalY) {
         super(xpAnimal, weightAnimal, genderAnimal, coordinateAnimalX, coordinateAnimalY);
     }
 
@@ -12,11 +16,11 @@ public class Wolf extends Carnivore {
     public void moveAnimal(Island island) {
         Random random = new Random();
 
-        int newX = getCoordinateAnimalX() + random.nextInt(2 * DefaultValues.wolfMaxMovement + 1) - DefaultValues.wolfMaxMovement;
-        int newY = getCoordinateAnimalY() + random.nextInt(2 * DefaultValues.wolfMaxMovement + 1) - DefaultValues.wolfMaxMovement;
+        int newX = getCoordinateAnimalX() + random.nextInt(2 * DefaultValues.bearMaxMovement + 1) - DefaultValues.bearMaxMovement;
+        int newY = getCoordinateAnimalY() + random.nextInt(2 * DefaultValues.bearMaxMovement + 1) - DefaultValues.bearMaxMovement;
 
         if (newX >= 0 && newX < island.getSizeX() && newY >= 0 && newY < island.getSizeY()) {
-            if (!isTooManyWolvesInCell(newX, newY, island)) {
+            if (!isTooManyBearsInCell(newX, newY, island)) {
                 int currentX = getCoordinateAnimalX();
                 int currentY = getCoordinateAnimalY();
 
@@ -48,14 +52,14 @@ public class Wolf extends Carnivore {
             }
         }
 
-        int requiredMeatCount = (int) Math.ceil(DefaultValues.wolfSatiety);
+        int requiredMeatCount = (int) Math.ceil(DefaultValues.bearSatiety);
         int eatenMeatCount = 0;
         double eatenWeight = 0.0;
 
         while (eatenMeatCount < requiredMeatCount && !priorityQueue.isEmpty()) {
             Animal animal = priorityQueue.poll();
 
-            if (eatenWeight + animal.getWeightAnimal() <= DefaultValues.wolfSatiety) {
+            if (eatenWeight + animal.getWeightAnimal() <= DefaultValues.bearSatiety) {
                 cell.remove(animal);
                 eatenWeight += animal.getWeightAnimal();
                 eatenMeatCount++;
@@ -71,19 +75,20 @@ public class Wolf extends Carnivore {
         }
     }
 
-
     private double getEatProbability(Animal animal) {
         if (animal instanceof Mouse) {
+            return 0.9;
+        } else if (animal instanceof Snake || animal instanceof Rabbit || animal instanceof Deer) {
             return 0.8;
-        } else if (animal instanceof Sheep) {
+        } else if (animal instanceof Sheep || animal instanceof Goat) {
             return 0.7;
-        } else if (animal instanceof Rabbit || animal instanceof Goat ) {
-            return 0.6;
-        } else if (animal instanceof Duck) {
+        } else if (animal instanceof Boar) {
+            return 0.5;
+        } else if (animal instanceof Horse) {
             return 0.4;
-        } else if (animal instanceof Deer || animal instanceof Boar) {
-            return 0.15;
-        } else if (animal instanceof Buffalo || animal instanceof Horse) {
+        } else if (animal instanceof Buffalo) {
+            return 0.2;
+        } else if (animal instanceof Duck) {
             return 0.1;
         }
         return 0.0;
@@ -95,32 +100,32 @@ public class Wolf extends Carnivore {
         int y = getCoordinateAnimalY();
         List<Object> cell = island.getGrid().get(x).get(y);
 
-        int wolfCount = 0;
+        int bearCount = 0;
         int maleCount = 0;
         int femaleCount = 0;
 
         for (Object obj : cell) {
-            if (obj instanceof Wolf) {
-                wolfCount++;
-                Wolf wolf = (Wolf) obj;
-                if (wolf.getGenderAnimal() == Gender.MALE) {
+            if (obj instanceof Bear) {
+                bearCount++;
+                Bear bear = (Bear) obj;
+                if (bear.getGenderAnimal() == Gender.MALE) {
                     maleCount++;
-                } else if (wolf.getGenderAnimal() == Gender.FEMALE) {
+                } else if (bear.getGenderAnimal() == Gender.FEMALE) {
                     femaleCount++;
                 }
             }
         }
 
-        if (wolfCount < DefaultValues.wolfMaxAnimalsPerCell) {
-            int remainingSpace = DefaultValues.wolfMaxAnimalsPerCell - wolfCount;
+        if (bearCount < DefaultValues.bearMaxAnimalsPerCell) {
+            int remainingSpace = DefaultValues.bearMaxAnimalsPerCell - bearCount;
             int minGenderCount = Math.min(maleCount, femaleCount);
-            int newWolfCount = Math.min(remainingSpace, minGenderCount);
+            int newBearCount = Math.min(remainingSpace, minGenderCount);
 
-            for (int i = 0; i < newWolfCount; i++) {
+            for (int i = 0; i < newBearCount; i++) {
                 Gender randomGender = Gender.getRandomGender();
-                Wolf newWolf = new Wolf(DefaultValues.allXpAnimal, DefaultValues.wolfWeight, randomGender, x, y);
+                Bear newBear = new Bear(DefaultValues.allXpAnimal, DefaultValues.bearWeight, randomGender, x, y);
 
-                cell.add(newWolf);
+                cell.add(newBear);
             }
         }
     }
@@ -132,12 +137,12 @@ public class Wolf extends Carnivore {
         island.getGrid().get(x).get(y).remove(this);
     }
 
-    private boolean isTooManyWolvesInCell(int x, int y, Island island) {
-        int wolfCount = 0;
+    private boolean isTooManyBearsInCell(int x, int y, Island island) {
+        int bearCount = 0;
         for (Object obj : island.getGrid().get(x).get(y)) {
-            if (obj instanceof Wolf) {
-                wolfCount++;
-                if (wolfCount >= DefaultValues.wolfMaxAnimalsPerCell) {
+            if (obj instanceof Bear) {
+                bearCount++;
+                if (bearCount >= DefaultValues.bearMaxAnimalsPerCell) {
                     return true;
                 }
             }

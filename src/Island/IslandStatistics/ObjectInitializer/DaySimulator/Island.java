@@ -1,3 +1,5 @@
+package Island.IslandStatistics.ObjectInitializer.DaySimulator;
+
 import java.util.*;
 
 public class Island {
@@ -10,15 +12,6 @@ public class Island {
         this.sizeY = sizeY;
         grid = new HashMap<>();
 
-        initializeIsland();
-    }
-
-    public void initializeIsland() {
-        ObjectInitializer.initializeIsland(this);
-    }
-
-    public void simulateDay() {
-        DaySimulator.simulateDay(this);
     }
 
     public int getSizeX() {

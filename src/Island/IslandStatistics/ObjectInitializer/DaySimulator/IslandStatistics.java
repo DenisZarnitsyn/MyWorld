@@ -1,4 +1,8 @@
-import java.util.ArrayList;
+package Island.IslandStatistics.ObjectInitializer.DaySimulator;
+
+import Animals.Grass.*;
+import DefaultValues.Gender.*;
+
 import java.util.List;
 import java.util.Map;
 

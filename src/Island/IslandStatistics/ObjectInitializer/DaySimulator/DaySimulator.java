@@ -1,3 +1,7 @@
+package Island.IslandStatistics.ObjectInitializer.DaySimulator;
+
+import Animals.Grass.*;
+import DefaultValues.Gender.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -6,8 +10,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class DaySimulator {
+
     public static void simulateDay(Island island) {
-        // Declare animalsToMove outside the try block
+
         List<Animal> animalsToMove = new ArrayList<>();
 
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());

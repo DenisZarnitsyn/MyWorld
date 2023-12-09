@@ -1,10 +1,14 @@
+package Animals.Grass;
+
+import DefaultValues.Gender.*;
+import Island.IslandStatistics.ObjectInitializer.DaySimulator.*;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+public class Deer extends Herbivore {
 
-public class Goat extends Herbivore {
-
-    public Goat(int xpAnimal, double weightAnimal, Gender genderAnimal, int coordinateAnimalX, int coordinateAnimalY) {
+    public Deer(int xpAnimal, double weightAnimal, Gender genderAnimal, int coordinateAnimalX, int coordinateAnimalY) {
         super(xpAnimal, weightAnimal, genderAnimal, coordinateAnimalX, coordinateAnimalY);
     }
 
@@ -12,11 +16,11 @@ public class Goat extends Herbivore {
     public void moveAnimal(Island island) {
         Random random = new Random();
 
-        int newX = getCoordinateAnimalX() + random.nextInt(2 * DefaultValues.goatMaxMovement + 1) - DefaultValues.goatMaxMovement;
-        int newY = getCoordinateAnimalY() + random.nextInt(2 * DefaultValues.goatMaxMovement + 1) - DefaultValues.goatMaxMovement;
+        int newX = getCoordinateAnimalX() + random.nextInt(2 * DefaultValues.deerMaxMovement + 1) - DefaultValues.deerMaxMovement;
+        int newY = getCoordinateAnimalY() + random.nextInt(2 * DefaultValues.deerMaxMovement + 1) - DefaultValues.deerMaxMovement;
 
         if (newX >= 0 && newX < island.getSizeX() && newY >= 0 && newY < island.getSizeY()) {
-            if (!isTooManyGoatsInCell(newX, newY, island)) {
+            if (!isTooManyDeersInCell(newX, newY, island)) {
                 int currentX = getCoordinateAnimalX();
                 int currentY = getCoordinateAnimalY();
 
@@ -36,7 +40,7 @@ public class Goat extends Herbivore {
         int y = getCoordinateAnimalY();
         List<Object> cell = island.getGrid().get(x).get(y);
 
-        int requiredGrassCount = (int) Math.ceil(DefaultValues.goatSatiety);
+        int requiredGrassCount = (int) Math.ceil(DefaultValues.deerSatiety);
         int eatenGrassCount = 0;
 
         Iterator<Object> iterator = cell.iterator();
@@ -62,32 +66,32 @@ public class Goat extends Herbivore {
         int y = getCoordinateAnimalY();
         List<Object> cell = island.getGrid().get(x).get(y);
 
-        int goatCount = 0;
+        int deerCount = 0;
         int maleCount = 0;
         int femaleCount = 0;
 
         for (Object obj : cell) {
-            if (obj instanceof Goat) {
-                goatCount++;
-                Goat goat = (Goat) obj;
-                if (goat.getGenderAnimal() == Gender.MALE) {
+            if (obj instanceof Deer) {
+                deerCount++;
+                Deer deer = (Deer) obj;
+                if (deer.getGenderAnimal() == Gender.MALE) {
                     maleCount++;
-                } else if (goat.getGenderAnimal() == Gender.FEMALE) {
+                } else if (deer.getGenderAnimal() == Gender.FEMALE) {
                     femaleCount++;
                 }
             }
         }
 
-        if (goatCount < DefaultValues.goatMaxAnimalsPerCell) {
-            int remainingSpace = DefaultValues.goatMaxAnimalsPerCell - goatCount;
+        if (deerCount < DefaultValues.deerMaxAnimalsPerCell) {
+            int remainingSpace = DefaultValues.deerMaxAnimalsPerCell - deerCount;
             int minGenderCount = Math.min(maleCount, femaleCount);
-            int newGoatCount = Math.min(remainingSpace, minGenderCount);
+            int newDeerCount = Math.min(remainingSpace, minGenderCount);
 
-            for (int i = 0; i < newGoatCount; i++) {
+            for (int i = 0; i < newDeerCount; i++) {
                 Gender randomGender = Gender.getRandomGender();
-                Goat newGoat = new Goat(DefaultValues.allXpAnimal, DefaultValues.goatWeight, randomGender, x, y);
+                Deer newDeer = new Deer(DefaultValues.allXpAnimal, DefaultValues.deerWeight, randomGender, x, y);
 
-                cell.add(newGoat);
+                cell.add(newDeer);
             }
         }
     }
@@ -99,12 +103,12 @@ public class Goat extends Herbivore {
         island.getGrid().get(x).get(y).remove(this);
     }
 
-    private boolean isTooManyGoatsInCell(int x, int y, Island island) {
-        int goatCount = 0;
+    private boolean isTooManyDeersInCell(int x, int y, Island island) {
+        int deerCount = 0;
         for (Object obj : island.getGrid().get(x).get(y)) {
-            if (obj instanceof Goat) {
-                goatCount++;
-                if (goatCount >= DefaultValues.goatMaxAnimalsPerCell) {
+            if (obj instanceof Deer) {
+                deerCount++;
+                if (deerCount >= DefaultValues.deerMaxAnimalsPerCell) {
                     return true;
                 }
             }

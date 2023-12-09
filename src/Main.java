@@ -1,3 +1,5 @@
+import Island.IslandStatistics.ObjectInitializer.DaySimulator.*;
+
 import java.util.Scanner;
 
 public class Main {
@@ -16,9 +18,10 @@ public class Main {
         Island island = new Island(sizeX, sizeY);
         System.out.println("World creation!");
 
+        ObjectInitializer.initializeIsland(island);
         for (int day = 1; day <= numDays; day++) {
             System.out.println("Day " + day + ":");
-            island.simulateDay();
+            DaySimulator.simulateDay(island);
         }
     }
 }

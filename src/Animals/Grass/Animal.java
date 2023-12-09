@@ -1,3 +1,8 @@
+package Animals.Grass;
+
+import DefaultValues.Gender.*;
+import Island.IslandStatistics.ObjectInitializer.DaySimulator.*;
+
 public abstract class Animal {
     private int xpAnimal;
     private double weightAnimal;

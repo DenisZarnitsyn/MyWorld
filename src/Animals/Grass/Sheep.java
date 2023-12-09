@@ -1,10 +1,15 @@
+package Animals.Grass;
+
+import DefaultValues.Gender.*;
+import Island.IslandStatistics.ObjectInitializer.DaySimulator.*;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class Buffalo extends Herbivore {
+public class Sheep extends Herbivore {
 
-    public Buffalo(int xpAnimal, double weightAnimal, Gender genderAnimal, int coordinateAnimalX, int coordinateAnimalY) {
+    public Sheep(int xpAnimal, double weightAnimal, Gender genderAnimal, int coordinateAnimalX, int coordinateAnimalY) {
         super(xpAnimal, weightAnimal, genderAnimal, coordinateAnimalX, coordinateAnimalY);
     }
 
@@ -12,11 +17,11 @@ public class Buffalo extends Herbivore {
     public void moveAnimal(Island island) {
         Random random = new Random();
 
-        int newX = getCoordinateAnimalX() + random.nextInt(2 * DefaultValues.buffaloMaxMovement + 1) - DefaultValues.buffaloMaxMovement;
-        int newY = getCoordinateAnimalY() + random.nextInt(2 * DefaultValues.buffaloMaxMovement + 1) - DefaultValues.buffaloMaxMovement;
+        int newX = getCoordinateAnimalX() + random.nextInt(2 * DefaultValues.sheepMaxMovement + 1) - DefaultValues.sheepMaxMovement;
+        int newY = getCoordinateAnimalY() + random.nextInt(2 * DefaultValues.sheepMaxMovement + 1) - DefaultValues.sheepMaxMovement;
 
         if (newX >= 0 && newX < island.getSizeX() && newY >= 0 && newY < island.getSizeY()) {
-            if (!isTooManyBuffaloInCell(newX, newY, island)) {
+            if (!isTooManySheepInCell(newX, newY, island)) {
                 int currentX = getCoordinateAnimalX();
                 int currentY = getCoordinateAnimalY();
 
@@ -36,7 +41,7 @@ public class Buffalo extends Herbivore {
         int y = getCoordinateAnimalY();
         List<Object> cell = island.getGrid().get(x).get(y);
 
-        int requiredGrassCount = (int) Math.ceil(DefaultValues.buffaloSatiety);
+        int requiredGrassCount = (int) Math.ceil(DefaultValues.sheepSatiety);
         int eatenGrassCount = 0;
 
         Iterator<Object> iterator = cell.iterator();
@@ -62,32 +67,32 @@ public class Buffalo extends Herbivore {
         int y = getCoordinateAnimalY();
         List<Object> cell = island.getGrid().get(x).get(y);
 
-        int buffaloCount = 0;
+        int sheepCount = 0;
         int maleCount = 0;
         int femaleCount = 0;
 
         for (Object obj : cell) {
-            if (obj instanceof Buffalo) {
-                buffaloCount++;
-                Buffalo buffalo = (Buffalo) obj;
-                if (buffalo.getGenderAnimal() == Gender.MALE) {
+            if (obj instanceof Sheep) {
+                sheepCount++;
+                Sheep sheep = (Sheep) obj;
+                if (sheep.getGenderAnimal() == Gender.MALE) {
                     maleCount++;
-                } else if (buffalo.getGenderAnimal() == Gender.FEMALE) {
+                } else if (sheep.getGenderAnimal() == Gender.FEMALE) {
                     femaleCount++;
                 }
             }
         }
 
-        if (buffaloCount < DefaultValues.buffaloMaxAnimalsPerCell) {
-            int remainingSpace = DefaultValues.buffaloMaxAnimalsPerCell - buffaloCount;
+        if (sheepCount < DefaultValues.sheepMaxAnimalsPerCell) {
+            int remainingSpace = DefaultValues.sheepMaxAnimalsPerCell - sheepCount;
             int minGenderCount = Math.min(maleCount, femaleCount);
-            int newBuffaloCount = Math.min(remainingSpace, minGenderCount);
+            int newSheepCount = Math.min(remainingSpace, minGenderCount);
 
-            for (int i = 0; i < newBuffaloCount; i++) {
+            for (int i = 0; i < newSheepCount; i++) {
                 Gender randomGender = Gender.getRandomGender();
-                Buffalo newBuffalo = new Buffalo(DefaultValues.allXpAnimal, DefaultValues.buffaloWeight, randomGender, x, y);
+                Sheep newSheep = new Sheep(DefaultValues.allXpAnimal, DefaultValues.sheepWeight, randomGender, x, y);
 
-                cell.add(newBuffalo);
+                cell.add(newSheep);
             }
         }
     }
@@ -99,12 +104,12 @@ public class Buffalo extends Herbivore {
         island.getGrid().get(x).get(y).remove(this);
     }
 
-    private boolean isTooManyBuffaloInCell(int x, int y, Island island) {
-        int buffaloCount = 0;
+    private boolean isTooManySheepInCell(int x, int y, Island island) {
+        int sheepCount = 0;
         for (Object obj : island.getGrid().get(x).get(y)) {
-            if (obj instanceof Buffalo) {
-                buffaloCount++;
-                if (buffaloCount >= DefaultValues.buffaloMaxAnimalsPerCell) {
+            if (obj instanceof Sheep) {
+                sheepCount++;
+                if (sheepCount >= DefaultValues.sheepMaxAnimalsPerCell) {
                     return true;
                 }
             }

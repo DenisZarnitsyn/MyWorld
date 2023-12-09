@@ -1,5 +1,7 @@
+package Animals.Grass;
+import DefaultValues.Gender.*;
+import Island.IslandStatistics.ObjectInitializer.DaySimulator.*;
 import java.util.List;
-import java.util.Random;
 
 public class Caterpillar extends Herbivore {
 
